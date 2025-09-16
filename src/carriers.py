@@ -49,7 +49,7 @@ def verify_mc_number_route():
 @bp.route("/loads")
 def get_loads_route():
     # Use local sample_loads.json for demo
-    json_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "sample_loads.json")
+    json_path = os.path.join(os.getcwd(), "data", "sample_loads.json")
     try:
         with open(json_path, "r", encoding="utf-8") as f:
             loads = json.load(f)
