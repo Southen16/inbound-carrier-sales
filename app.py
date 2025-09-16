@@ -10,3 +10,7 @@ if not fmcsa_api_key:
 app = Flask(__name__)
 
 carriers.init_app(app, fmcsa_api_key)
+
+if __name__ == "__main__":
+	port = int(os.environ.get("PORT", 5000))
+	app.run(host="0.0.0.0", port=port)
