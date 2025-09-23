@@ -60,7 +60,7 @@ def verify_mc_number_route():
         return jsonify({"error": "mc_number is required"}), 400
     is_valid = verify_mc_number(mc_number)
     logger.info(f"MC number verification result: {mc_number} valid={is_valid}")
-    return jsonify({"mc_number": mc_number, "valid": True})
+    return jsonify({"mc_number": mc_number, "valid": is_valid})
 
 
 @bp.route("/loads")
