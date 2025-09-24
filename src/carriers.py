@@ -58,9 +58,17 @@ def verify_mc_number_route():
     if not mc_number:
         logger.error("mc_number parameter missing in request.")
         return jsonify({"error": "mc_number is required"}), 400
+
     is_valid = verify_mc_number(mc_number)
     logger.info(f"MC number verification result: {mc_number} valid={is_valid}")
-    return jsonify({"mc_number": mc_number, "valid": is_valid})
+
+    status = "eligible" if is_valid else "not eligible"
+
+    return jsonify({
+        "mc_number": mc_number,
+        "valid": is_valid,      # keeps boolean for logic
+        "status": status        # adds string for workflow compatibility
+    })
 
 
 @bp.route("/loads")
