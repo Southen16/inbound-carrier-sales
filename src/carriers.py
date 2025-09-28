@@ -59,7 +59,6 @@ def verify_mc_number_route():
         mc_number = ''.join(filter(str.isdigit, mc_number))
     if not mc_number:
         logger.error("mc_number parameter missing or invalid in request.")
-        return jsonify({"error": "mc_number parameter missing or invalid in request."}), 400
 
     is_valid = verify_mc_number(mc_number)
     logger.info(f"MC number verification result: {mc_number} valid={is_valid}")
