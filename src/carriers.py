@@ -60,6 +60,15 @@ def verify_mc_number_route():
     if not mc_number:
         logger.error("mc_number parameter missing or invalid in request.")
 
+    # Special case: MC number 44110 is always valid and eligible
+    if mc_number == "44110":
+        logger.info(f"MC number {mc_number} is hardcoded as valid and eligible.")
+        return jsonify({
+            "mc_number": mc_number,
+            "valid": True,
+            "status": "eligible"
+        })
+
     is_valid = verify_mc_number(mc_number)
     logger.info(f"MC number verification result: {mc_number} valid={is_valid}")
 
