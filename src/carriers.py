@@ -55,9 +55,11 @@ def verify_mc_number(mc_number: str) -> bool:
 @bp.route("/verify_mc_number")
 def verify_mc_number_route():
     mc_number = request.args.get("mc_number")
+    if mc_number:
+        mc_number = ''.join(filter(str.isdigit, mc_number))
     if not mc_number:
-        logger.error("mc_number parameter missing in request.")
-        return jsonify({"error": "mc_number is required"}), 400
+        logger.error("mc_number parameter missing or invalid in request.")
+        return jsonify({"error": "mc_number parameter missing or invalid in request."}), 400
 
     is_valid = verify_mc_number(mc_number)
     logger.info(f"MC number verification result: {mc_number} valid={is_valid}")
